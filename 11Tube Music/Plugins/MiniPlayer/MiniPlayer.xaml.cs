@@ -39,7 +39,7 @@ namespace ElevenTube_Music.Plugins.MiniPlayer
             mainWindow.VideoPaused += HandleVideoPaused;
             var windowHandle = new IntPtr((long)this.AppWindow.Id.Value);
 
-            this.AppWindow.MoveAndResize(new RectInt32(0, 0, 400, 120));
+            this.AppWindow.MoveAndResize(new RectInt32(10, 10, 390, 90));
 
             if (Options != null)
             {
@@ -53,9 +53,9 @@ namespace ElevenTube_Music.Plugins.MiniPlayer
                     int screenHeight = Screen.PrimaryScreen.WorkingArea.Height;
                     
                     if (position=="TopLeft") this.AppWindow.Move(new PointInt32(10, 10));
-                    else if (position=="TopRight") this.AppWindow.Move(new PointInt32(screenWidth - 410,0));
-                    else if (position=="BottomLeft") this.AppWindow.Move(new PointInt32(0, screenHeight-130));
-                    else if (position== "BottomRight") this.AppWindow.Move(new PointInt32(screenWidth - 410, screenHeight - 130));
+                    else if (position=="TopRight") this.AppWindow.Move(new PointInt32(screenWidth - 400,10));
+                    else if (position=="BottomLeft") this.AppWindow.Move(new PointInt32(10, screenHeight-100));
+                    else if (position== "BottomRight") this.AppWindow.Move(new PointInt32(screenWidth - 400, screenHeight - 100));
                 }
 
                 PluginOption backdropOption = Options.Find(option => option.Name == "backdrop");
@@ -84,7 +84,7 @@ namespace ElevenTube_Music.Plugins.MiniPlayer
 
                 if (SeekBar.Value >= SeekBar.Maximum)
                 {
-                    PlayIcon.Symbol = Symbol.Play;
+                    PlayIcon.Glyph = "\uE768";
                     timer.Stop();
                 }
             };
@@ -104,14 +104,14 @@ namespace ElevenTube_Music.Plugins.MiniPlayer
             PointInt32 positon = this.AppWindow.Position;
             int x = positon.X;
             int y = positon.Y;
-            if (positon.X > screenWidth / 2) x = screenWidth - 410;
-            if (positon.Y > screenHeight / 2) y = screenHeight - 130;
+            if (positon.X > screenWidth / 2) x = screenWidth - 400;
+            if (positon.Y > screenHeight / 2) y = screenHeight - 100;
             MainGrid.Visibility = Visibility.Visible;
             SeekBar.Visibility = Visibility.Visible;
             ShowButton.Visibility = Visibility.Collapsed;
             RootGrid.Margin = new Thickness(8);
 
-            this.AppWindow.MoveAndResize(new RectInt32(x, y, 400, 120));
+            this.AppWindow.MoveAndResize(new RectInt32(x, y, 390, 90));
         }
 
         private void HideButton_Click(object sender, RoutedEventArgs e)
@@ -160,14 +160,14 @@ namespace ElevenTube_Music.Plugins.MiniPlayer
             if (IsPaused.paused)
             {
                 SeekBar.Value = IsPaused.currentTime;
-                PlayIcon.Symbol = Symbol.Play;
+                PlayIcon.Glyph = "\uE768";
                 timer.Stop();
             }
             else
             {
                 //Use IsPaused.currentTime
                 SeekBar.Value = IsPaused.currentTime;
-                PlayIcon.Symbol = Symbol.Pause;
+                PlayIcon.Glyph = "\uE769";
                 timer.Start();
             }
         }
