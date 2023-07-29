@@ -34,5 +34,6 @@ namespace ElevenTube_Music.Types
         public bool isUnpluggedCorpus { get; set; }
         public string musicVideoType { get; set; }
         public bool isLiveContent { get; set; }
+        public string like { get; set; }
     }
 }

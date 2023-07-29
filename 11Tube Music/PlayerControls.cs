@@ -7,7 +7,9 @@ using System;
 using System.Diagnostics;
 using System.Reflection.Metadata;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using Windows.Storage;
+using static Vanara.PInvoke.User32;
 
 namespace ElevenTube_Music
 {
@@ -15,35 +17,30 @@ namespace ElevenTube_Music
     {
         public async void PauseMusic()
         {
-            if (!IsPaused)
-            {
-                PlayPauseMusic();
-            }
+            await WebView.ExecuteScriptAsync("document.querySelector('#movie_player').pauseVideo()");
         }
         public async void PlayMusic()
         {
-            if (IsPaused)
-            {
-                PlayPauseMusic();
-            }
+            await WebView.ExecuteScriptAsync("document.querySelector('#movie_player').playVideo()");
         }
 
         public async void PlayPauseMusic()
         {
-            await WebView.ExecuteScriptAsync("document.querySelector('#play-pause-button').click()");
+            if (IsPaused) PlayMusic();
+            else PauseMusic();
         }
 
         public async void PreviousMusic()
         {
-            await WebView.ExecuteScriptAsync("document.querySelector('.previous-button').click()");
+            await WebView.ExecuteScriptAsync("document.querySelector('#movie_player').previousVideo()");
         }
         public async void NextMusic()
         {
-            await WebView.ExecuteScriptAsync("document.querySelector('.next-button').click()");
+            await WebView.ExecuteScriptAsync("document.querySelector('#movie_player').nextVideo()");
         }
         public async void SetPlayerSeek(int time)
         {
-            await WebView.ExecuteScriptAsync(String.Format("document.querySelector('.html5-main-video').currentTime ={0}; ",time));
+            await WebView.ExecuteScriptAsync(String.Format("document.querySelector('#movie_player').seekTo({0})", time));
         }
 
     }

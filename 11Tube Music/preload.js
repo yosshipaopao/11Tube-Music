@@ -93,9 +93,11 @@ function setupLoadstartEventListener(video, api) {
     );
     video.addEventListener("loadstart", () => {
         const raw_data = api.getPlayerResponse();
+        const videoDetail = raw_data.videoDetails;
+        videoDetail.like = document.querySelector('#button-shape-like').getAttribute("aria-pressed") == "true" ? "like" : document.querySelector('#button-shape-dislike').getAttribute("aria-pressed") == "true" ? "dislike" : "none";
         const data = {
             type: 'videoDetail',
-            data: raw_data.videoDetails
+            data: videoDetail
         };
         window.chrome.webview.postMessage(data);
     });
