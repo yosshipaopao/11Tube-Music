@@ -15,11 +15,11 @@ namespace ElevenTube_Music
 {
     public sealed partial class MainWindow : Window
     {
-        public async void PauseMusic()
+        public void PauseMusic()
         {
             await WebView.ExecuteScriptAsync("document.querySelector('#movie_player').pauseVideo()");
         }
-        public async void PlayMusic()
+        public void PlayMusic()
         {
             await WebView.ExecuteScriptAsync("document.querySelector('#movie_player').playVideo()");
         }

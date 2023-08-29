@@ -8,7 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <StackPanel Margin="8" Opacity="0.6" x:Name="RootGrid" VerticalAlignment="Center">
+    <StackPanel Margin="8,8,8,8" Opacity="0.6" x:Name="RootGrid">
         <Grid x:Name="MainGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -18,12 +18,12 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Border Height="48" Width="48" Grid.Column="0" Grid.Row="0" CornerRadius="4" VerticalAlignment="Center">
+            <Border Height="48" Width="48" Grid.Column="0" Grid.Row="0" CornerRadius="4" Margin="8,0" VerticalAlignment="Center" Translation="0,0,48">
                 <Image Height="48" Width="48" Stretch="UniformToFill" x:Name="ThumbnailImage" />
             </Border>
-            <StackPanel Grid.Column="1" Grid.Row="0" Margin="8,0" VerticalAlignment="Center">
-                <TextBlock Text="Unknown" x:Name="SongName" FontSize="18" TextTrimming="CharacterEllipsis"/>
-                <TextBlock Text="Unknown" x:Name="ArtistName" FontSize="13" TextTrimming="CharacterEllipsis"/>
+            <StackPanel Grid.Column="1" Grid.Row="0" Padding="8">
+                <TextBlock Text="Unknown" x:Name="SongName" FontSize="20" />
+                <TextBlock Text="Unknown" x:Name="ArtistName" FontSize="15" />
             </StackPanel>
             <Grid  Grid.Column="2" Grid.Row="0">
                 <Grid.RowDefinitions>
@@ -33,27 +33,27 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal"  HorizontalAlignment="Right">
-                    <Button x:Name="HideButton" Width="30" Height="20" Padding="0">
-                        <FontIcon Glyph="&#xE70D;" FontSize="10"/>
+                <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal"  HorizontalAlignment="Right" Margin="0,0,8,8">
+                    <Button x:Name="HideButton" Padding="8,5" Click="HideButton_Click">
+                        <FontIcon Glyph="{x:Bind HiddenIcon}" FontSize="16"/>
                     </Button>
                 </StackPanel>
-                <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal"  HorizontalAlignment="Center">
-                    <Button Margin="0,0,5,0" x:Name="PreviousButton" Width="24" Height="24" Padding="0" CornerRadius="12">
-                        <FontIcon Glyph="&#xE892;" FontSize="12" FontWeight="Bold"/>
+                <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal"  HorizontalAlignment="Center" Margin="0,0,8,0">
+                    <Button Margin="0,0,5,0" x:Name="PreviousButton" Padding="14,8" Click="PreviousButton_Click">
+                        <FontIcon Glyph="&#xE892;" FontSize="16"/>
                     </Button>
-                    <Button Margin="0,0,5,0" x:Name="PlayButton" Height="30" Width="30" CornerRadius="15" Padding="0">
-                        <FontIcon Glyph="&#xE768;" x:Name="PlayIcon" FontSize="18"/>
+                    <Button Margin="0,0,5,0" x:Name="PlayButton" Padding="14,8" Click="PlayButton_Click">
+                        <FontIcon x:Name="PlayIcon" Glyph="&#xE768;" FontSize="16"/>
                     </Button>
-                    <Button x:Name="NextButton"  Width="24" Height="24" Padding="0" CornerRadius="12">
-                        <FontIcon Glyph="&#xE893;" FontSize="12" FontWeight="Bold"/>
+                    <Button x:Name="NextButton" Padding="14,8" Click="NextButton_Click">
+                        <FontIcon Glyph="&#xE893;" FontSize="16"/>
                     </Button>
                 </StackPanel>
             </Grid>
         </Grid>
-        <Slider x:Name="SeekBar"></Slider>
-        <Button x:Name="ShowButton"  Width="40" Height="25" Visibility="Collapsed" Padding="0">
-            <FontIcon Glyph="&#xE70E;" Width="20" Height="15" Margin="10,5"/>
+        <Slider x:Name="SeekBar" Margin="8,4" IsThumbToolTipEnabled="False"></Slider>
+        <Button x:Name="ShowButton" Visibility="Collapsed" Padding="{x:Bind hiddenPadding}" Click="ReturnButton_Click">
+            <FontIcon Glyph="{x:Bind ShowIcon}" FontSize="16"/>
         </Button>
     </StackPanel>
 </Window>
